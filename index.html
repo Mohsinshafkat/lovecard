@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For My Beloved Maira ❤️</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      /* Ultra 3D Deep Cyan & Sky Blue Gradient Theme */
+      background: radial-gradient(circle at center, #0c2042 0%, #061126 60%, #020817 100%);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      perspective: 1200px;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    #particles-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* 3D Glowing Ambient Orbs */
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      z-index: 1;
+      opacity: 0.6;
+      animation: floatOrb 10s infinite alternate ease-in-out;
+    }
+    .glow-orb-1 { width: 350px; height: 350px; background: #00e1ff; top: -80px; left: -80px; }
+    .glow-orb-2 { width: 400px; height: 400px; background: #0077ff; bottom: -80px; right: -80px; }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      100% { transform: translate(50px, 50px) scale(1.2) rotate(15deg); }
+    }
+
+    /* Ultra 3D Glassmorphism Container */
+    .main-container {
+      position: relative;
+      z-index: 10;
+      width: 90%;
+      max-width: 520px;
+      height: 90vh;
+      max-height: 730px;
+      background: rgba(10, 25, 50, 0.65);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1.5px solid rgba(0, 225, 255, 0.35);
+      border-radius: 32px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7),
+                  0 0 40px rgba(0, 150, 255, 0.25),
+                  inset 0 0 25px rgba(0, 225, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 20px;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transform: rotateX(2deg) rotateY(-2deg);
+      transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .main-container:hover {
+      transform: rotateX(0deg) rotateY(0deg) scale(1.01);
+      box-shadow: 0 35px 70px rgba(0, 0, 0, 0.8),
+                  0 0 50px rgba(0, 225, 255, 0.4),
+                  inset 0 0 30px rgba(0, 225, 255, 0.25);
+    }
+
+    .top-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 12;
+    }
+
+    .badge {
+      background: rgba(0, 225, 255, 0.15);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      border: 1px solid rgba(0, 225, 255, 0.4);
+      color: #7dd3fc;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .music-btn {
+      background: rgba(0, 225, 255, 0.15);
+      border: 1px solid rgba(0, 225, 255, 0.4);
+      color: #7dd3fc;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .music-btn:hover { background: rgba(0, 225, 255, 0.35); transform: scale(1.15) rotate(10deg); color: #fff; }
+
+    .view-frame {
+      width: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      margin: 10px 0;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(20px) scale(0.95);
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .slide.active { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
+
+    /* 3D Image Card Frame */
+    .img-card {
+      width: 100%;
+      height: 58%;
+      max-height: 320px;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6),
+                  0 0 20px rgba(0, 180, 255, 0.2);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      position: relative;
+      background: rgba(0, 0, 0, 0.3);
+      transform: translateZ(20px);
+    }
+
+    .img-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+
+    .slide.active .img-card img { transform: scale(1.04); }
+
+    .image-overlay-text {
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #ffffff;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 12px rgba(0, 150, 255, 0.7);
+      padding: 0 10px;
+      z-index: 5;
+    }
+
+    .img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .img-placeholder i { font-size: 3.5rem; margin-bottom: 10px; color: #ff334b; }
+
+    .quote-box { margin-top: 14px; text-align: center; padding: 0 10px; }
+    .quote-text { font-family: 'Dancing Script', cursive; font-size: 1.6rem; line-height: 1.3; color: #e0f2fe; text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6); }
+    .sub-quote { font-size: 0.82rem; opacity: 0.85; margin-top: 4px; font-weight: 300; color: #bae6fd; }
+
+    /* 3D Glowing Next Button */
+    .btn-next {
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      color: #fff;
+      border: none;
+      padding: 13px 34px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0, 114, 255, 0.5),
+                  inset 0 2px 5px rgba(255, 255, 255, 0.4);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 12;
+    }
+    .btn-next:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 15px 30px rgba(0, 114, 255, 0.7), inset 0 2px 8px rgba(255, 255, 255, 0.6); }
+
+    /* Strictly Red Hearts */
+    .hero-heart { 
+      font-size: 4.5rem; 
+      color: #ff334b; 
+      margin-bottom: 15px; 
+      animation: heartBeat 1.2s infinite ease-in-out;
+      filter: drop-shadow(0 0 20px rgba(255, 51, 75, 0.9));
+    }
+    @keyframes heartBeat {
+      0% { transform: scale(1); }
+      14% { transform: scale(1.25); }
+      28% { transform: scale(1); }
+      42% { transform: scale(1.25); }
+      70% { transform: scale(1); }
+    }
+
+    .prompt-title { font-family: 'Great Vibes', cursive; font-size: 2.6rem; text-align: center; color: #fff; margin-bottom: 20px; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+    .options-grid { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 320px; }
+
+    .btn-option {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1.5px solid rgba(0, 225, 255, 0.3);
+      color: white;
+      padding: 13px;
+      border-radius: 16px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+    }
+    .btn-option:hover { background: rgba(0, 225, 255, 0.25); transform: translateY(-2px); border-color: #00e1ff; box-shadow: 0 8px 20px rgba(0, 225, 255, 0.3); }
+    .btn-option.primary-opt { background: linear-gradient(135deg, #00c6ff, #0072ff); border: none; box-shadow: 0 8px 20px rgba(0, 114, 255, 0.4); }
+
+    .corner-rose { position: absolute; font-size: 2rem; opacity: 0.9; animation: floatRose 4s infinite alternate ease-in-out; filter: drop-shadow(0 0 10px rgba(255, 51, 75, 0.6)); }
+    .rose-tl { top: -10px; left: -10px; }
+    .rose-tr { top: -10px; right: -10px; animation-delay: 1s; }
+    .rose-bl { bottom: -10px; left: -10px; animation-delay: 2s; }
+    .rose-br { bottom: -10px; right: -10px; animation-delay: 3s; }
+
+    @keyframes floatRose {
+      0% { transform: translateY(0) rotate(0deg); }
+      100% { transform: translateY(-8px) rotate(10deg); }
+    }
+
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(2, 8, 23, 0.85); backdrop-filter: blur(15px);
+      z-index: 100; display: flex; justify-content: center; align-items: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    }
+    .modal-overlay.show { opacity: 1; pointer-events: auto; }
+
+    .modal-box {
+      width: 85%; max-width: 380px;
+      background: linear-gradient(145deg, rgba(12, 32, 66, 0.95), rgba(6, 17, 38, 0.95));
+      border: 2px solid rgba(0, 225, 255, 0.5); border-radius: 24px;
+      padding: 30px 24px; text-align: center;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 225, 255, 0.3);
+    }
+    .broken-heart-icon { font-size: 4.5rem; color: #ff334b; margin-bottom: 15px; filter: drop-shadow(0 0 15px rgba(255, 51, 75, 0.7)); }
+    .modal-text { font-size: 1.2rem; font-weight: 600; color: #ffffff; margin-bottom: 20px; line-height: 1.4; }
+    .btn-modal-close {
+      background: linear-gradient(135deg, #00c6ff, #0072ff); color: white;
+      border: none; padding: 11px 28px; font-size: 1rem; font-weight: 600; border-radius: 30px; cursor: pointer;
+      box-shadow: 0 6px 20px rgba(0, 114, 255, 0.4);
+    }
+
+    /* Grand Finale 3D Styling */
+    .finale-container { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100%; text-align: center; position: relative; }
+    
+    .single-heart-wrapper {
+      position: relative;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .grand-red-heart {
+      font-size: 4.2rem;
+      color: #ff334b;
+      filter: drop-shadow(0 0 25px rgba(255, 51, 75, 0.9));
+      opacity: 0;
+      transform: scale(0);
+    }
+
+    .slide.active .grand-red-heart {
+      animation: heartAppear 1.2s forwards cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s, heartBeat 1.2s infinite ease-in-out 1.5s;
+    }
+
+    @keyframes heartAppear {
+      0% { opacity: 0; transform: scale(0); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    .thank-you-title { font-family: 'Great Vibes', cursive; font-size: 2.6rem; color: #ffffff; margin-bottom: 4px; opacity: 0; text-shadow: 0 0 15px rgba(0, 225, 255, 0.8); }
+    .love-declaration { font-family: 'Dancing Script', cursive; font-size: 1.45rem; color: #e0f2fe; line-height: 1.3; opacity: 0; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+    
+    /* 3D Interactive Date Picker Box */
+    .date-picker-box {
+      margin-top: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1.5px solid rgba(0, 225, 255, 0.4);
+      padding: 10px 16px;
+      border-radius: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      opacity: 0;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .date-picker-box label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #7dd3fc;
+    }
+
+    .date-input-custom {
+      background: rgba(12, 32, 66, 0.8);
+      border: 1px solid #00e1ff;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .screenshot-instruction {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: #ffffff;
+      background: rgba(0, 180, 255, 0.2);
+      border: 1px solid rgba(0, 225, 255, 0.4);
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-top: 10px;
+      opacity: 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .slide.active .thank-you-title { animation: fadeInUp 1s forwards 1.0s; }
+    .slide.active .love-declaration { animation: fadeInUp 1s forwards 1.3s; }
+    .slide.active .date-picker-box { animation: fadeInUp 1s forwards 1.6s; }
+    .slide.active .screenshot-instruction { animation: fadeInUp 1s forwards 1.9s; }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+  <canvas id="particles-canvas"></canvas>
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <div class="main-container">
+    <div class="top-bar">
+      <div class="badge" id="step-indicator">Page 1 / 10</div>
+      <button class="music-btn" id="music-toggle" title="Toggle Soft Music">
+        <i class="fas fa-music"></i>
+      </button>
+    </div>
+
+    <div class="view-frame">
+      <!-- Slide 1 -->
+      <div class="slide active" data-step="1">
+        <div class="img-card">
+          <img src="image1.jpeg" alt="Memory 1" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+          <div class="image-overlay-text">I love u Suhinri</div>
+          <div class="img-placeholder" style="display:none;"><i class="fas fa-heart"></i><p><strong>image1.jpeg</strong></p></div>
+        </div>
+        <div class="quote-box">
+          <div class="quote-text">"You are my today and all of my tomorrows."</div>
+          <div class="sub-quote">From the moment you entered my life, everything became magical.</div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="slide" data-step="2">
+        <div class="img-card">
+          <img src="image2.jpeg" alt="Memory 2" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+          <div class="image-overlay-text">I love u Muhinji Jaan</div>
+          <div class="img-placeholder" style="display:none;"><i class="fas fa-heart"></i><p><strong>image2.jpeg</strong></p></div>
+        </div>
+        <div class="quote-box">
+          <div class="quote-text">"In your smile, I see something more beautiful than stars."</div>
+          <div class="sub-quote">Your smile brightens even my darkest days, Maira.</div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="slide" data-step="3">
+        <div class="img-card">
+          <img src="image3.jpeg" alt="Memory 3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+          <div class="image-overlay-text">I love u Muhinji Zindagi</div>
+          <div class="img-placeholder" style="display:none;"><i class="fas fa-heart"></i><p><strong>image3.jpeg</strong></p></div>
+        </div>
+        <div class="quote-box">
+          <div class="quote-text">"Every love story is beautiful, but ours is my favorite."</div>
+          <div class="sub-quote">Holding your hand feels like holding my whole world.</div>
+        </div>
+      </div>
+
+      <!-- Slide 4 -->
+      <div class="slide" data-step="4">
+        <div class="img-card">
+          <img src="image4.jpeg" alt="Memory 4" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+          <div class="image-overlay-text">I love u khoobsoorat</div>
+          <div class="img-placeholder" style="display:none;"><i class="fas fa-heart"></i><p><strong>image4.jpeg</strong></p></div>
+        </div>
+        <div class="quote-box">
+          <div class="quote-text">"I fell in love with you because of a million tiny things..."</div>
+          <div class="sub-quote">The way you laugh, the way you care, everything about you.</div>
+        </div>
+      </div>
+
+      <!-- Slide 5 -->
+      <div class="slide" data-step="5">
+        <div class="img-card">
+          <img src="image5.jpeg" alt="Memory 5" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+          <div class="image-overlay-text">I love u Dilber</div>
+          <div class="img-placeholder" style="display:none;"><i class="fas fa-heart"></i><p><strong>image5.jpeg</strong></p></div>
+        </div>
+        <div class="quote-box">
+          <div class="quote-text">"You are my answered prayer, my sweetest dream come true."</div>
+          <div class="sub-quote">Blessed to have you as my fiancée and future.</div>
+        </div>
+      </div>
+
+      <!-- Slide 6 -->
+      <div class="slide" data-step="6">
+        <div class="img-card">
+          <img src="image6.jpeg" alt="Memory 6" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+          <div class="image-overlay-text">I love u Jan e man</div>
+          <div class="img-placeholder" style="display:none;"><i class="fas fa-heart"></i><p><strong>image6.jpeg</strong></p></div>
+        </div>
+        <div class="quote-box">
+          <div class="quote-text">"If I had a flower for every time I thought of you..."</div>
+          <div class="sub-quote">I could walk through my garden forever.</div>
+        </div>
+      </div>
+
+      <!-- Slide 7 -->
+      <div class="slide" data-step="7">
+        <div class="img-card">
+          <img src="image7.jpeg" alt="Memory 7" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+          <div class="image-overlay-text">I love u Muhinja haseen khuwab</div>
+          <div class="img-placeholder" style="display:none;"><i class="fas fa-heart"></i><p><strong>image7.jpeg</strong></p></div>
+        </div>
+        <div class="quote-box">
+          <div class="quote-text">"I loved you yesterday, love you still, always have, always will."</div>
+          <div class="sub-quote">My promise to you is timeless and forever.</div>
+        </div>
+      </div>
+
+      <!-- Slide 8 -->
+      <div class="slide" data-step="8">
+        <div class="img-card">
+          <img src="image8.jpeg" alt="Memory 8" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+          <div class="image-overlay-text">I love u Muhinji Zaal</div>
+          <div class="img-placeholder" style="display:none;"><i class="fas fa-heart"></i><p><strong>image8.jpeg</strong></p></div>
+        </div>
+        <div class="quote-box">
+          <div class="quote-text">"You are the piece that makes my heart feel completely whole."</div>
+          <div class="sub-quote">With you, everything just feels right.</div>
+        </div>
+      </div>
+
+      <!-- Slide 9 -->
+      <div class="slide" data-step="9">
+        <div class="img-card">
+          <img src="image9.jpeg" alt="Memory 9" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+          <div class="image-overlay-text">I love u Muhinji pehrin ayn aakhiri muhabbat</div>
+          <div class="img-placeholder" style="display:none;"><i class="fas fa-heart"></i><p><strong>image9.jpeg</strong></p></div>
+        </div>
+        <div class="quote-box">
+          <div class="quote-text">"My heart belongs to you, today, tomorrow, and forever."</div>
+          <div class="sub-quote">No distance or time can ever change what I feel.</div>
+        </div>
+      </div>
+
+      <!-- Slide 10 -->
+      <div class="slide" data-step="10">
+        <div class="img-card">
+          <img src="image10.jpeg" alt="Memory 10" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"/>
+          <div class="image-overlay-text">I love u muhinje akhirat ja sathi</div>
+          <div class="img-placeholder" style="display:none;"><i class="fas fa-heart"></i><p><strong>image10.jpeg</strong></p></div>
+        </div>
+        <div class="quote-box">
+          <div class="quote-text">"Ready for our next beautiful chapter, my queen Maira?"</div>
+          <div class="sub-quote">Press next to open my heart to you...</div>
+        </div>
+      </div>
+
+      <!-- STEP 11: DO YOU LOVE ME? -->
+      <div class="slide" data-step="11">
+        <div class="corner-rose rose-tl">❤️</div><div class="corner-rose rose-tr">❤️</div><div class="corner-rose rose-bl">❤️</div><div class="corner-rose rose-br">❤️</div>
+        <i class="fas fa-heart hero-heart"></i>
+        <h2 class="prompt-title">Do you love me?</h2>
+        <div class="options-grid">
+          <button class="btn-option primary-opt" onclick="handleLoveResponse(true)">YES ❤️</button>
+          <button class="btn-option" onclick="handleLoveResponse(false)">NO 😢</button>
+        </div>
+      </div>
+
+      <!-- STEP 12: HOW MUCH DO YOU LOVE ME? -->
+      <div class="slide" data-step="12">
+        <i class="fas fa-heart hero-heart"></i>
+        <h2 class="prompt-title">How much do you love me?</h2>
+        <div class="options-grid">
+          <button class="btn-option" onclick="handleAmountResponse('0%')">0%</button>
+          <button class="btn-option" onclick="handleAmountResponse('50%')">50%</button>
+          <button class="btn-option" onclick="handleAmountResponse('100%')">100%</button>
+          <button class="btn-option primary-opt" onclick="handleAmountResponse('Unlimited')">Unlimited ❤️</button>
+        </div>
+      </div>
+
+      <!-- STEP 13: WILL YOU MARRY ME? -->
+      <div class="slide" data-step="13">
+        <div class="corner-rose rose-tl">❤️</div><div class="corner-rose rose-tr">❤️</div><div class="corner-rose rose-bl">❤️</div><div class="corner-rose rose-br">❤️</div>
+        <i class="fas fa-heart hero-heart"></i>
+        <h2 class="prompt-title">Will you marry me? 💍</h2>
+        <div class="options-grid">
+          <button class="btn-option primary-opt" onclick="handleMarryResponse(true)">YES ❤️</button>
+          <button class="btn-option" onclick="handleMarryResponse(false)">NO 😢</button>
+        </div>
+      </div>
+
+      <!-- STEP 14: HOW MANY CHILDREN DO YOU WANT? -->
+      <div class="slide" data-step="14">
+        <i class="fas fa-heart hero-heart"></i>
+        <h2 class="prompt-title">How many children do you want? 👶</h2>
+        <div class="options-grid">
+          <button class="btn-option" onclick="handleChildrenResponse('1')">1</button>
+          <button class="btn-option" onclick="handleChildrenResponse('2')">2</button>
+          <button class="btn-option" onclick="handleChildrenResponse('3')">3</button>
+          <button class="btn-option primary-opt" onclick="handleChildrenResponse('10')">10 ❤️</button>
+        </div>
+      </div>
+
+      <!-- STEP 15: DATE PROPOSAL -->
+      <div class="slide" data-step="15">
+        <div class="corner-rose rose-tl">❤️</div><div class="corner-rose rose-tr">❤️</div><div class="corner-rose rose-bl">❤️</div><div class="corner-rose rose-br">❤️</div>
+        <i class="fas fa-heart hero-heart"></i>
+        <h2 class="prompt-title">Do you want to go on a date with me? 🌹</h2>
+        <div class="options-grid">
+          <button class="btn-option primary-opt" onclick="handleDateResponse(true)">YES ❤️</button>
+          <button class="btn-option" onclick="handleDateResponse(false)">NO 😢</button>
+        </div>
+      </div>
+
+      <!-- STEP 16: GRAND FINALE WITH DATE INPUT -->
+      <div class="slide" data-step="16">
+        <div class="finale-container">
+          <div class="single-heart-wrapper">
+            <i class="fas fa-heart grand-red-heart"></i>
+          </div>
+          <h1 class="thank-you-title">Thank you! 💖</h1>
+          <p class="love-declaration">I Love You More Than You My Love Maira ❤️✨</p>
+          
+          <div class="date-picker-box">
+            <label for="chosen-date">Select Date & Time for our Date 🌹</label>
+            <input type="datetime-local" id="chosen-date" class="date-input-custom">
+          </div>
+
+          <div class="screenshot-instruction">Send screenshot of this page to confirm date</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-next" id="next-btn" onclick="nextSlide()">
+      <span>Next 💖</span>
+      <i class="fas fa-arrow-right"></i>
+    </button>
+  </div>
+
+  <div class="modal-overlay" id="popup-modal">
+    <div class="modal-box">
+      <div class="broken-heart-icon">💔</div>
+      <div class="modal-text" id="modal-msg">This is not acceptable please choose YES ❤️</div>
+      <button class="btn-modal-close" onclick="closeModal()">Try Again 💕</button>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const totalSlideshowPages = 10;
+    const nextBtn = document.getElementById('next-btn');
+    const stepIndicator = document.getElementById('step-indicator');
+    const modalOverlay = document.getElementById('popup-modal');
+    const modalMsg = document.getElementById('modal-msg');
+
+    function updateUI() {
+      document.querySelectorAll('.slide').forEach(slide => {
+        const step = parseInt(slide.getAttribute('data-step'));
+        if (step === currentStep) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      if (currentStep <= 10) {
+        stepIndicator.innerText = `Page ${currentStep} / ${totalSlideshowPages}`;
+        nextBtn.style.display = 'flex';
+      } else if (currentStep === 11) {
+        stepIndicator.innerText = `Question 1 / 5`;
+        nextBtn.style.display = 'none';
+      } else if (currentStep === 12) {
+        stepIndicator.innerText = `Question 2 / 5`;
+        nextBtn.style.display = 'none';
+      } else if (currentStep === 13) {
+        stepIndicator.innerText = `Question 3 / 5`;
+        nextBtn.style.display = 'none';
+      } else if (currentStep === 14) {
+        stepIndicator.innerText = `Question 4 / 5`;
+        nextBtn.style.display = 'none';
+      } else if (currentStep === 15) {
+        stepIndicator.innerText = `Question 5 / 5`;
+        nextBtn.style.display = 'none';
+      } else if (currentStep === 16) {
+        stepIndicator.innerText = `Forever & Always ❤️`;
+        nextBtn.style.display = 'none';
+        triggerGrandFinale();
+      }
+    }
+
+    function nextSlide() {
+      if (currentStep < totalSlideshowPages) {
+        currentStep++;
+        updateUI();
+      } else if (currentStep === totalSlideshowPages) {
+        currentStep = 11;
+        updateUI();
+      }
+    }
+
+    function showModal(message) {
+      modalMsg.innerText = message;
+      modalOverlay.classList.add('show');
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove('show');
+    }
+
+    function handleLoveResponse(isYes) {
+      if (isYes) { currentStep = 12; updateUI(); }
+      else { showModal("This is not acceptable please choose YES ❤️"); }
+    }
+
+    function handleAmountResponse(option) {
+      if (option === 'Unlimited') { currentStep = 13; updateUI(); }
+      else { showModal("This is not acceptable please choose UNLIMITED ❤️"); }
+    }
+
+    function handleMarryResponse(isYes) {
+      if (isYes) { currentStep = 14; updateUI(); }
+      else { showModal("This is not acceptable please choose YES ❤️"); }
+    }
+
+    function handleChildrenResponse(option) {
+      if (option === '10') { currentStep = 15; updateUI(); }
+      else { showModal("Wrong choice! Only 10 is acceptable! 🤭❤️"); }
+    }
+
+    function handleDateResponse(isYes) {
+      if (isYes) { currentStep = 16; updateUI(); }
+      else { showModal("This is not acceptable please choose YES ❤️"); }
+    }
+
+    function triggerGrandFinale() {
+      const duration = 5 * 1000;
+      const animationEnd = Date.now() + duration;
+      const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+      function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+      const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) { return clearInterval(interval); }
+        const particleCount = 50 * (timeLeft / duration);
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }, colors: ['#ff334b', '#00e1ff', '#ffffff'] }));
+        confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }, colors: ['#ff334b', '#00e1ff', '#ffffff'] }));
+      }, 250);
+    }
+
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    });
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * width;
+        this.y = height + Math.random() * 100;
+        this.size = Math.random() * 14 + 8;
+        this.speedY = Math.random() * 1.5 + 0.8;
+        this.speedX = Math.random() * 0.8 - 0.4;
+        this.opacity = Math.random() * 0.6 + 0.3;
+        this.type = Math.random() > 0.4 ? 'heart' : 'fairy';
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.02;
+      }
+      update() {
+        this.y -= this.speedY;
+        this.x += Math.sin(this.y * 0.01) + this.speedX;
+        this.rotation += this.rotSpeed;
+        if (this.y < -30) { this.reset(); }
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.globalAlpha = this.opacity;
+        if (this.type === 'heart') {
+          ctx.fillStyle = '#ff334b';
+          ctx.beginPath();
+          const topCurveHeight = this.size * 0.3;
+          ctx.moveTo(0, topCurveHeight);
+          ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
+          ctx.bezierCurveTo(-this.size / 2, (this.size + topCurveHeight) / 2, 0, this.size, 0, this.size);
+          ctx.bezierCurveTo(0, this.size, this.size / 2, (this.size + topCurveHeight) / 2, this.size / 2, topCurveHeight);
+          ctx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurveHeight);
+          ctx.closePath();
+          ctx.fill();
+        } else {
+          ctx.fillStyle = '#7dd3fc';
+          ctx.shadowBlur = 12;
+          ctx.shadowColor = '#00e1ff';
+          ctx.beginPath();
+          ctx.arc(0, 0, this.size / 4, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    }
+
+    const particles = Array.from({ length: 45 }, () => new Particle());
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    let audioCtx = null;
+    let isPlaying = false;
+    let synthInterval = null;
+    const musicBtn = document.getElementById('music-toggle');
+
+    function playMelodyNote() {
+      if (!audioCtx || !isPlaying) return;
+      const notes = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25];
+      const freq = notes[Math.floor(Math.random() * notes.length)];
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+      gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 0.5);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.5);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 2.6);
+    }
+
+    musicBtn.addEventListener('click', () => {
+      if (!audioCtx) { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+      if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        musicBtn.innerHTML = '<i class="fas fa-volume-high"></i>';
+        musicBtn.style.background = 'rgba(0, 225, 255, 0.4)';
+        playMelodyNote();
+        synthInterval = setInterval(playMelodyNote, 1200);
+      } else {
+        musicBtn.innerHTML = '<i class="fas fa-music"></i>';
+        musicBtn.style.background = 'rgba(0, 225, 255, 0.15)';
+        clearInterval(synthInterval);
+      }
+    });
+
+    updateUI();
+  </script>
+</body>
+</html>
